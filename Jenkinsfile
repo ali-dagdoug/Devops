@@ -24,12 +24,5 @@ pipeline {
        sh "mvn sonar:sonar -Dsonar.login=admin -Dsonar.password=esprit"
       }
 	  }
-    stage('NEXUS')
-         {
-          steps{
-            echo "nexus"
-               sh "mvn clean deploy -DskipTests"
-                  }
-          }
-}
+    }
 }
