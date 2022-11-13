@@ -24,6 +24,13 @@ pipeline {
                                                      sh "mvn  clean install"
                                                   }
                                               }
+                                              stage('NEXUS')
+                                                      {
+                                                          steps{
+                                                              echo "nexus"
+                                                               sh ' mvn clean deploy -DskipTests'
+                                                          }
+                                                      }
     
     }
 }
