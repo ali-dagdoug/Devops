@@ -13,6 +13,11 @@ pipeline {
       steps {
         sh "mvn -version"
       }
-	
-  }
+	  }
+    stage('maven build'){
+      steps {
+        sh "mvn compile -e"
+      }
+	  }
+}
 }
