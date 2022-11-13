@@ -5,7 +5,7 @@ pipeline {
 
    stage('Checkout GIT ') {
             steps {
-                echo 'Pulliing ...';
+                echo 'Pulling ...';
                 git branch: 'ali_dagdoug', url: 'https://github.com/ali-dagdoug/Devops.git'            }
 
         }
@@ -13,15 +13,6 @@ pipeline {
       steps {
         sh "mvn -version"
       }
-	stage('Cleaning') {
-                                      steps {
-                                       script {
-                                        echo 'cleaning';
-                                        sh 'mvn clean '
-                                       }
-                                      }
-                                    }
-    
-    }
+	
   }
 }
