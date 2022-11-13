@@ -14,15 +14,16 @@ pipeline {
         sh "mvn -version"
       }
 	  }
-    stage('maven build'){
-      steps {
-        sh "mvn compile -e"
-      }
-	  }
     stage('MVN SONARQUBE'){
       steps {
        sh "mvn sonar:sonar -Dsonar.login=admin -Dsonar.password=esprit"
       }
 	  }
+    stage('Build Maven Spring'){
+                                                  steps{
+                                                     sh "mvn  clean install"
+                                                  }
+                                              }
+    
     }
 }
