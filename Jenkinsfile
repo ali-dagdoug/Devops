@@ -32,6 +32,32 @@ pipeline {
       sh "mvn clean deploy -DskipTests"
             }
         }
+        stage('BUILD IMAGE') {
+            steps {
+                script {
+                    dockerImage = docker.build registry + ":latest"
+                }
+            }
+        }
+        stage('PUSH IMAGE') {
+            steps {
+                script {
+                    docker.withRegistry( '', registryCredential ) {
+                        dockerImage.push()
+                    }
+                }
+            }
+        }
+        stage('REMOVE UNUSED DOCKER IMAGE') {
+            steps{
+                sh "docker rmi $registry:latest"
+            }
+        }
+        stage('DOCKER COMPOSE') {
+            steps{
+                sh "docker-compose up -d"
+            }
+        }
     
     }
 }
