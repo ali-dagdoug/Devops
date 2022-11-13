@@ -54,6 +54,7 @@
 		<dependency>
 <groupId>org.projectlombok</groupId>
 <artifactId>lombok</artifactId>
+<version>1.18.10</version>
 <scope>provided</scope>
 </dependency>
 		<dependency>
@@ -85,11 +86,5 @@
 			</plugin>
 		</plugins>
 	</build>
-<distributionManagement>
-		<repository>
-			<id>deploymentRepo</id>
-			<name>Nexus Repository</name>
-			<url>http://192.168.56.101:8081/repository/maven-releases/</url>
-		</repository>
-	</distributionManagement>
+
 </project>

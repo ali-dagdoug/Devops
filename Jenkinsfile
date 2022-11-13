@@ -30,7 +30,7 @@ pipeline {
       echo "nexus"
       sh "mvn clean deploy -DskipTests"
             }
-                                                      }
+        }
     
     }
 }
