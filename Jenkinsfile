@@ -1,6 +1,10 @@
 pipeline {
   agent any
-  
+   environment {
+        registry = "alidagdoug/examen"
+        registryCredential = 'dockerhub_id'
+        dockerImage = ''
+    }
   stages {
 
    stage('Checkout GIT ') {
