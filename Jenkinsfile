@@ -19,5 +19,10 @@ pipeline {
         sh "mvn compile -e"
       }
 	  }
+    stage('MVN SONARQUBE'){
+      steps {
+       'mvn sonar:sonar -Dsonar.login=admin -Dsonar.password=esprit'
+      }
+	  }
 }
 }
