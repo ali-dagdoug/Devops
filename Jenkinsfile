@@ -13,17 +13,24 @@ pipeline {
                 git branch: 'ali_dagdoug', url: 'https://github.com/ali-dagdoug/Devops.git'            }
 
         }
+        
     stage('Testing maven'){
       steps {
         sh "mvn -version"
       }
 	  }
-    stage('Build Maven Spring'){
-          steps{
-            sh "mvn  clean install"
-              }
-              }
-    stage('MVN SONARQUBE'){
+    stage('COMPILING') { steps { sh 'mvn compile' } }
+            stage('MVN CLEAN') {
+            steps {
+                sh 'mvn clean';
+            }
+        }
+        stage('MVN INSTALL') {
+            steps {
+                sh 'mvn install -DskipTests'
+            }
+        }
+      stage('MVN SONARQUBE'){
       steps {
        sh "mvn sonar:sonar -Dsonar.login=admin -Dsonar.password=esprit"
       }
