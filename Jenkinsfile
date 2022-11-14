@@ -1,10 +1,6 @@
 pipeline {
   agent any
-   environment {
-        registry = "alidagdoug/examen"
-        registryCredential = 'dockerhub_id'
-        dockerImage = ''
-    }
+   
   stages {
 
    stage('Checkout GIT ') {
@@ -43,27 +39,34 @@ pipeline {
       sh "mvn clean deploy -DskipTests"
             }
         }
-        stage('BUILD IMAGE') {
+       stage('Build docker image'){
+                             steps{
+                                 script{
+                                    sh 'docker build -t alidagdoug/examen .'
+                                 }
+                             }
+                         }
+
+		stage("Maven Build") {
             steps {
                 script {
-                    dockerImage = docker.build registry + ":latest"
+                    sh "mvn package -DskipTests=true"
                 }
             }
         }
-        stage('PUSH IMAGE') {
-            steps {
-                script {
-                    docker.withRegistry( '', registryCredential ) {
-                        dockerImage.push()
-                    }
-                }
-            }
-        }
-        stage('REMOVE UNUSED DOCKER IMAGE') {
-            steps{
-                sh "docker rmi $registry:latest"
-            }
-        }
+
+		 		 stage('Docker login') {
+
+                                         steps {
+                                          sh 'echo "login Docker ...."'
+                   	sh 'docker login -u alidagdoug -p AM20407382dg'
+                               }  }
+		 stage('Docker push') {
+
+                 steps {
+                      sh 'echo "Docker is pushing ...."'
+                     	sh 'docker push alidagdoug/examen'
+                        }  }
         stage('DOCKER COMPOSE') {
             steps{
                 sh "docker-compose up -d"
