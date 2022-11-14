@@ -13,7 +13,7 @@ services:
   app:
     depends_on:
       - mysqldb
-    image: alidagdoug/examen:latest
+    image: alidagdoug/examen1:latest
     restart: on-failure
     ports:
       - 8092:8092
